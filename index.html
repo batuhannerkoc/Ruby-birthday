@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="it">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-  <title>Roberta | Y2K Doğum G��nü ✦ 2000'ler Stili</title>
+  <title>ROBERTA | Edizione Speciale 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -15,78 +15,72 @@
 
 <body>
 
-  <!-- COVER - Y2K GLAM -->
   <header class="cover">
-    <p class="cover-eyebrow">✨ BUON COMPLEANNO ✨ &nbsp;✦&nbsp; 2026</p>
-    <h1 class="cover-title">Roberta</h1>
-    <div class="cover-rule" aria-hidden="true"><span></span><span>◆</span><span></span></div>
-    <p class="cover-deck"><em>scatta una foto e lascia un ricordo</em></p>
-    <a href="#booth" class="cover-cta">📷 &nbsp;APRI LA FOTOCAMERA &nbsp;✨</a>
+    <p class="cover-eyebrow">✦ EDIZIONE SPECIALE • MAGGIO 2026 ✦</p>
+
+    <div class="cover-main">
+      <h1 class="cover-title">ROBERTA</h1>
+      <p class="cover-deck">il grande party</p>
+    </div>
+
+    <a href="#booth" class="cover-cta">📷 SCATTA IL RICORDO</a>
   </header>
 
-  <!-- PHOTO BOOTH -->
   <section class="booth" id="booth">
-    <h2 class="section-title">Lascia un <em>ricordo</em> 💕</h2>
+    <h2 class="section-title">CREA LA TUA <em>COPERTINA</em> ✦</h2>
 
-    <!-- Viewfinder -->
     <div class="viewfinder hide" id="viewfinder">
       <video id="video" autoplay playsinline muted></video>
       <div class="vf-idle" id="vf-idle">
-        <p>��� premi il pulsante per aprire la fotocamera</p>
+        <p>📷 premi il pulsante per aprire la fotocamera</p>
       </div>
       <div class="flash-overlay" id="flash"></div>
     </div>
 
-    <!-- Polaroid preview -->
     <div class="polaroid-wrap hide" id="polaroid-wrap">
       <div class="polaroid">
         <img id="preview" src="" alt="La tua foto" />
-        <p class="polaroid-caption">Compleanno di Roberta &nbsp;✦&nbsp; 2026</p>
+        <p class="polaroid-caption">ROBERTA SPECIALE 2026</p>
       </div>
     </div>
 
-    <!-- Controls: step 1 -->
     <div class="controls" id="ctrl-open">
-      <button class="btn-primary" id="btn-open">📷 &nbsp;Apri la fotocamera</button>
+      <button class="btn-primary" id="btn-open">📷 APRI LA FOTOCAMERA</button>
     </div>
 
-    <!-- Controls: step 2 -->
     <div class="controls hide" id="ctrl-snap">
-      <button class="btn-primary" id="btn-snap">📸 &nbsp;Scatta foto</button>
-      <button class="btn-ghost" id="btn-flip">🔄 &nbsp;Gira la camera</button>
+      <button class="btn-primary" id="btn-snap">📸 SCATTA FOTO</button>
+      <button class="btn-ghost" id="btn-flip">🔄 GIRA LA FOTOCAMERA</button>
     </div>
 
-    <!-- Controls: step 3 -->
     <div class="controls hide" id="ctrl-preview">
-      <button class="btn-primary" id="btn-save">✅ &nbsp;Salva in galleria</button>
-      <button class="btn-ghost" id="btn-retake">🔄 &nbsp;Rifai</button>
+      <button class="btn-primary" id="btn-save">✅ SALVA IN GALLERIA</button>
+      <button class="btn-ghost" id="btn-retake">🔄 RIFAI</button>
     </div>
 
-    <p class="booth-status" id="booth-status">💖 Apri la fotocamera e lascia un ricordo a Roberta 💖</p>
+    <p class="booth-status" id="booth-status">PRONTA PER IL FLASH? 💋</p>
   </section>
 
-  <!-- GALLERY -->
   <section class="gallery" id="gallery">
-    <h2 class="section-title">I momenti <em>della festa</em> 🎀</h2>
+    <h2 class="section-title">L'EDITORIALE <em>DEL PARTY</em> ⚡</h2>
     <p class="gallery-count" id="gallery-count"></p>
     <div class="gallery-grid" id="gallery-grid">
-      <p class="gallery-empty">Nessuna foto ancora — sii il primo ✦</p>
+      <p class="gallery-empty">Ancora nessuna foto — sii il primo ✦</p>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer class="site-footer">
-    <p class="footer-title">Roberta</p>
-    <p class="footer-sub">Buon Compleanno &nbsp;��&nbsp; 2026</p>
-    <p style="font-size: 12px; margin-top: 20px; opacity: 0.5;">✨ Y2K Forever ✨</p>
+    <p class="footer-title">ROBERTA</p>
+    <p class="footer-sub">Buon Compleanno &nbsp;✦&nbsp; 2026</p>
+    <p style="font-family: monospace; font-size: 11px; margin-top: 20px; opacity: 0.4; letter-spacing: 2px;">✦ MODALITÀ
+      EDITORIALE Y2K ✦</p>
   </footer>
 
-  <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
-    <button class="lb-close" id="lb-close" aria-label="Chiudi">✕</button>
+    <button class="lb-close" id="lb-close" aria-label="Chiudi">✕ CHIUDI</button>
     <div class="lb-polaroid">
       <img id="lb-img" src="" alt="Foto della festa" />
-      <p class="lb-caption">Compleanno di Roberta &nbsp;✦&nbsp; 2026</p>
+      <p class="lb-caption">ROBERTA ✦ EDIZIONE 2026</p>
     </div>
   </div>
 

@@ -1,9 +1,9 @@
 // ─────────────────────────────────────────────────────────────
-//  Roberta Birthday Gallery — Y2K EDITION with Confetti & Stickers
+//  Roberta Birthday Gallery — Y2K FASHION MAGAZINE EDITION
 // ─────────────────────────────────────────────────────────────
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getDatabase, ref, push, onValue, limitToLast } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 // ── 🔧 FIREBASE CONFIG ────────────────────────────────────────
 const firebaseConfig = {
@@ -41,16 +41,14 @@ let stream     = null;
 let facingMode = "user";
 let lastPhoto  = null;
 
-// Y2K mesajları ✨
-const y2kMessages = [
-  "Ayy çok tatlısın! 💕", 
-  "Yıldız gibi poz ver! ⭐", 
-  "SLAY QUEEN! 👑", 
-  "Britney vibes! 🎤", 
-  "Too hot! 🔥", 
-  "That's hot! 🥵",
-  "Glamour queen! 💄",
-  "You're a rockstar! 🎸"
+// İtalyanca Editoryal Sloganlar
+const magazineSlogans = [
+  "INQUADRA L'OBIETTIVO! ⚡", 
+  "SEI BELLISSIMA! 👑", 
+  "SOLO VIBES DA POPSTAR 🎤", 
+  "THAT'S HOT! 🔥",
+  "FASCINO DA COPERTINA 💄",
+  "SEI UNA ROCKSTAR! 🎸"
 ];
 
 const show = el => el.classList.remove("hide");
@@ -58,66 +56,34 @@ const hide = el => el.classList.add("hide");
 
 const setStatus = (msg) => {
   statusEl.textContent = msg;
-  // Her 3 saniyede bir random mesaj göster (eğer kamera açıksa)
-  if (!msg.includes("Apri") && !msg.includes("Errore")) {
+  if (!msg.includes("APRI") && !msg.includes("Errore") && !msg.includes("Salvataggio")) {
     setTimeout(() => {
       if (!ctrlSnap.classList.contains("hide")) {
-        statusEl.textContent = y2kMessages[Math.floor(Math.random() * y2kMessages.length)];
+        statusEl.textContent = magazineSlogans[Math.floor(Math.random() * magazineSlogans.length)];
       }
     }, 3000);
   }
 };
 
-// ── CONFETTI ──────────────────────────────────────────────────
+// ── CONFETTI FALLBACK ─────────────────────────────────────────
 function explodeConfetti() {
-  const canvas = document.createElement("canvas");
-  canvas.id = "confetti-canvas";
-  document.body.appendChild(canvas);
-  
-  const duration = 15 * 1000;
-  const animationEnd = Date.now() + duration;
-  const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 1000 };
-  
-  function randomInRange(min, max) {
-    return Math.random() * (max - min) + min;
-  }
-  
-  const interval = setInterval(function() {
-    const timeLeft = animationEnd - Date.now();
-    
-    if (timeLeft <= 0) {
-      clearInterval(interval);
-      const confettiCanvas = document.getElementById("confetti-canvas");
-      if (confettiCanvas) confettiCanvas.remove();
-      return;
-    }
-    
-    const particleCount = 50 * (timeLeft / duration);
-    confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.9), y: Math.random() - 0.2 } });
-  }, 250);
-}
-
-// Basit confetti (eğer confetti kütüphanesi yoksa çalışsın)
-window.confetti = window.confetti || function(options) {
-  // Fallback - emoji yağdır
-  for(let i = 0; i < 30; i++) {
+  for(let i = 0; i < 35; i++) {
     setTimeout(() => {
       const emoji = document.createElement("div");
-      emoji.textContent = ["✨", "🎉", "💖", "⭐", "🌸", "💕", "🎀"][Math.floor(Math.random() * 7)];
+      emoji.textContent = ["✨", "💖", "⭐", "⚡", "🌸", "🎀"][Math.floor(Math.random() * 6)];
       emoji.style.position = "fixed";
       emoji.style.left = Math.random() * window.innerWidth + "px";
       emoji.style.top = "-20px";
       emoji.style.fontSize = Math.random() * 20 + 15 + "px";
       emoji.style.zIndex = "1001";
       emoji.style.pointerEvents = "none";
-      emoji.style.animation = `fall ${Math.random() * 2 + 2}s linear forwards`;
+      emoji.style.animation = `fall ${Math.random() * 2 + 1.5}s linear forwards`;
       document.body.appendChild(emoji);
-      setTimeout(() => emoji.remove(), 3000);
-    }, i * 50);
+      setTimeout(() => emoji.remove(), 2500);
+    }, i * 60);
   }
-};
+}
 
-// CSS animasyonu ekle
 if (!document.querySelector("#confetti-style")) {
   const style = document.createElement("style");
   style.id = "confetti-style";
@@ -130,163 +96,167 @@ if (!document.querySelector("#confetti-style")) {
   document.head.appendChild(style);
 }
 
-// ── BASİT STICKER EKLEME (Fotoğrafa kalp bas) ────────────────
-async function addStickerToPhoto(imageDataUrl, stickerType = "heart") {
+// ── AUTOMATIC MAGAZINE LOGO KATMANI ──
+async function addEditorialBranding(imageDataUrl) {
   return new Promise((resolve) => {
     const img = new Image();
     img.onload = () => {
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
-      canvas.width = img.width;
-      canvas.height = img.height;
       
-      ctx.drawImage(img, 0, 0);
+      canvas.width = 1080;
+      canvas.height = 1440;
       
-      // Sticker çiz (sağ alt köşe)
-      const stickerSize = Math.min(img.width, img.height) * 0.15;
-      const x = img.width - stickerSize - 10;
-      const y = img.height - stickerSize - 10;
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
       
-      if (stickerType === "heart") {
-        ctx.font = `${stickerSize}px Arial`;
-        ctx.fillStyle = "#FF69B4";
-        ctx.fillText("❤️", x, y + stickerSize);
-      } else if (stickerType === "star") {
-        ctx.font = `${stickerSize}px Arial`;
-        ctx.fillStyle = "#FFD700";
-        ctx.fillText("⭐", x, y + stickerSize);
-      }
+      const fontSize = Math.floor(canvas.width * 0.055);
+      ctx.font = `black ${fontSize}px Impact, sans-serif`;
       
-      resolve(canvas.toDataURL("image/jpeg", 0.9));
+      // ROBERTA MAG Logosu
+      ctx.fillStyle = "#ff007f";
+      ctx.textBaseline = "bottom";
+      ctx.textAlign = "left";
+      ctx.fillText("ROBERTA MAG", 30, canvas.height - 30);
+      
+      // Sağ Alt Köşe Issue Yazısı
+      ctx.font = `italic ${fontSize * 0.55}px Georgia`;
+      ctx.fillStyle = "#ffffff";
+      ctx.textAlign = "right";
+      ctx.fillText("EDIZIONE 2026 ✦", canvas.width - 30, canvas.height - 35);
+      
+      resolve(canvas.toDataURL("image/jpeg", 0.88));
     };
     img.src = imageDataUrl;
   });
 }
 
-// ── Gallery (sadece son 30 fotoğraf) ─────────────────────────
+// ── GALLERY (Realtime Database Listener) ──────────────────────
 onValue(ref(db, "photos"), snap => {
   const data = snap.val();
   if (!data) {
-    galleryGrid.innerHTML = `<p class="gallery-empty">Henüz fotoğraf yok — ilk sen ol ✦</p>`;
+    galleryGrid.innerHTML = `<p class="gallery-empty">Ancora nessuna copertina — sii il primo ✦</p>`;
     galleryCount.textContent = "";
     return;
   }
   const photos = Object.values(data).sort((a,b) => b.ts - a.ts).slice(0, 30);
-  galleryCount.textContent = photos.length + (photos.length === 1 ? " anı" : " anı");
+  galleryCount.textContent = photos.length + (photos.length === 1 ? " COPERTINA" : " COPERTINE");
   galleryGrid.innerHTML = "";
   photos.forEach((p, i) => {
     const c = document.createElement("div");
     c.className = "g-card";
     c.style.animationDelay = (i * 0.04) + "s";
-    c.innerHTML = `<img src="${p.data}" alt="Foto ${i+1}" loading="lazy"><p class="g-card-cap">Roberta ✦ 2026</p>`;
+    c.innerHTML = `<img src="${p.data}" alt="Foto ${i+1}" loading="lazy"><p class="g-card-cap">EDIZIONE SPECIALE 2026</p>`;
     c.onclick = () => { lbImg.src = p.data; lightbox.classList.add("on"); document.body.style.overflow="hidden"; };
     galleryGrid.appendChild(c);
   });
 });
 
-// ── Camera (geliştirilmiş hata yönetimi) ─────────────────────
+// ── CAMERA OPERATIONAL ────────────────────────────────────────
 async function openCamera() {
-  setStatus("Fotokabin açılıyor... ✨");
+  setStatus("APERTURA DELLO STUDIO... ✨");
   try {
     if (stream) stream.getTracks().forEach(t => t.stop());
     
     let constraints = {
       video: { 
-        facingMode: { exact: facingMode },
-        width: { ideal: 1280 },
-        height: { ideal: 720 }
+        facingMode: { ideal: facingMode },
+        width: { ideal: 1440 },
+        height: { ideal: 1080 }
       },
       audio: false
     };
     
-    try {
-      stream = await navigator.mediaDevices.getUserMedia(constraints);
-    } catch (err) {
-      console.warn("Exact constraint failed, trying ideal:", err);
-      constraints = {
-        video: { 
-          facingMode: { ideal: facingMode },
-          width: { ideal: 1280 },
-          height: { ideal: 720 }
-        },
-        audio: false
-      };
-      stream = await navigator.mediaDevices.getUserMedia(constraints);
-    }
-    
+    stream = await navigator.mediaDevices.getUserMedia(constraints);
     video.srcObject = stream;
     video.style.display = "block";
     await video.play();
+    
+    if(facingMode === "user") {
+      video.style.transform = "scaleX(-1)";
+    } else {
+      video.style.transform = "scaleX(1)";
+    }
+
     document.getElementById("viewfinder").classList.remove("hide");
     vfIdle.style.display = "none";
     polaroid.style.display = "none";
     polaroid.classList.add("hide");
     hide(ctrlOpen); show(ctrlSnap);
-    setStatus(y2kMessages[Math.floor(Math.random() * y2kMessages.length)]);
+    setStatus(magazineSlogans[Math.floor(Math.random() * magazineSlogans.length)]);
   } catch (e) {
     console.error(e);
-    if (e.name === "NotAllowedError") {
-      setStatus("Kamera izni vermelisin, yoksa fotoğraf çekemem 💔 Ayarlardan izin ver!");
-    } else if (e.name === "NotFoundError") {
-      setStatus("Kamera bulunamadı 😢 Telefonunda kamera var mı?");
-    } else {
-      setStatus("Kamera açılamadı. Safari veya Chrome'da dene!");
-    }
+    setStatus("Errore della fotocamera. Usa Safari o Chrome!");
   }
 }
 
-// ── Fotoğraf çek + efekt + sticker ───────────────────────────
+// ── TAKE PHOTO PROCESS ────────────────────────────────────────
 async function takePhoto() {
-  canvas.width  = video.videoWidth  || 1080;
-  canvas.height = video.videoHeight || 1440;
+  canvas.width  = 1080;
+  canvas.height = 1440;
   const ctx = canvas.getContext("2d");
+  
   if (facingMode === "user") { 
     ctx.translate(canvas.width, 0); 
     ctx.scale(-1, 1); 
   }
-  ctx.drawImage(video, 0, 0);
+  
+  const videoWidth = video.videoWidth;
+  const videoHeight = video.videoHeight;
+  const videoAspect = videoWidth / videoHeight;
+  const canvasAspect = canvas.width / canvas.height;
+  
+  let sx, sy, sWidth, sHeight;
+  if (videoAspect > canvasAspect) {
+    sHeight = videoHeight;
+    sWidth = videoHeight * canvasAspect;
+    sx = (videoWidth - sWidth) / 2;
+    sy = 0;
+  } else {
+    sWidth = videoWidth;
+    sHeight = videoWidth / canvasAspect;
+    sx = 0;
+    sy = (videoHeight - sHeight) / 2;
+  }
+
+  ctx.drawImage(video, sx, sy, sWidth, sHeight, 0, 0, canvas.width, canvas.height);
+  
   if (facingMode === "user") { 
     ctx.setTransform(1, 0, 0, 1, 0, 0); 
   }
   
   let photoData = canvas.toDataURL("image/jpeg", 0.85);
   
-  // Rastgele sticker ekle (kalp veya yıldız)
-  const stickerType = Math.random() > 0.5 ? "heart" : "star";
-  photoData = await addStickerToPhoto(photoData, stickerType);
-  
+  photoData = await addEditorialBranding(photoData);
   lastPhoto = photoData;
   
-  // Flaş efekti (pembe)
   flash.classList.add("go");
-  setTimeout(() => flash.classList.remove("go"), 200);
+  setTimeout(() => flash.classList.remove("go"), 250);
   
-  // Shutter sesi (tiz bir bip)
   try {
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     const oscillator = audioCtx.createOscillator();
     const gainNode = audioCtx.createGain();
     oscillator.connect(gainNode);
     gainNode.connect(audioCtx.destination);
-    oscillator.frequency.value = 880;
-    gainNode.gain.value = 0.1;
+    oscillator.frequency.value = 950;
+    gainNode.gain.value = 0.08;
     oscillator.start();
-    gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.3);
-    oscillator.stop(audioCtx.currentTime + 0.3);
-  } catch(e) { console.log("Ses çalınamadı"); }
+    gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.25);
+    oscillator.stop(audioCtx.currentTime + 0.25);
+  } catch(e) {}
   
   preview.src = lastPhoto;
   polaroid.classList.remove("hide");
-  polaroid.style.display = "flex";
+  polaroid.style.display = "block";
   video.style.display = "none";
   hide(ctrlSnap); show(ctrlPreview);
-  setStatus("Ti piace? Aşkım! Kaydet ya da yeniden çek 🌹");
+  setStatus("MERAVIGLIOSA! SALVA O RIFACCI 💋");
 }
 
 async function savePhoto() {
   if (!lastPhoto) return;
   $("btn-save").disabled = true;
-  setStatus("Kaydediliyor... 💾");
+  setStatus("SALVATAGGIO... 💾");
   try {
     await push(ref(db, "photos"), { data: lastPhoto, ts: Date.now() });
     lastPhoto = null; preview.src = "";
@@ -294,14 +264,13 @@ async function savePhoto() {
     video.style.display = "block";
     hide(ctrlPreview); show(ctrlSnap);
     
-    // KONFETİ PATLAT! 🎉
     explodeConfetti();
-    setStatus("Galeriye eklendi! 🎉 Sen bir superstar'sın! 🌟");
+    setStatus("COPERTINA PUBBLICATA! SEI UNA SUPERSTAR 🌟");
     
     $("gallery").scrollIntoView({ behavior: "smooth" });
   } catch(e) {
     console.error(e);
-    setStatus("Kaydetme hatası. Firebase config'ini kontrol et!");
+    setStatus("Errore durante il salvataggio.");
   }
   $("btn-save").disabled = false;
 }
@@ -311,20 +280,19 @@ function retakePhoto() {
   polaroid.style.display = "none";
   video.style.display = "block";
   hide(ctrlPreview); show(ctrlSnap);
-  setStatus("Tekrar dene! Pozunu ayarla 😊");
+  setStatus("METTITI IN POSA! ⚡");
 }
 
-// ── Lightbox ──────────────────────────────────────────────────
+// ── LIGHTBOX OPERATIONS ───────────────────────────────────────
 $("lb-close").onclick = () => { lightbox.classList.remove("on"); lbImg.src=""; document.body.style.overflow=""; };
 lightbox.onclick = e => { if(e.target===lightbox){ lightbox.classList.remove("on"); lbImg.src=""; document.body.style.overflow=""; } };
 
-// ── Events ────────────────────────────────────────────────────
+// ── EVENTS BINDING ────────────────────────────────────────────
 $("btn-open").onclick  = openCamera;
 $("btn-snap").onclick  = takePhoto;
 $("btn-flip").onclick  = () => { 
   facingMode = facingMode === "user" ? "environment" : "user"; 
   openCamera(); 
-  setStatus("Kamera değişti! 📸");
 };
 $("btn-save").onclick  = savePhoto;
 $("btn-retake").onclick = retakePhoto;
