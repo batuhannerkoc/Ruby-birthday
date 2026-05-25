@@ -7,13 +7,13 @@ import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebas
 
 // ── 🔧 FIREBASE CONFIG — sostituisci con i tuoi valori ────────
 const firebaseConfig = {
-  apiKey:            "YOUR_API_KEY",
-  authDomain:        "YOUR_PROJECT_ID.firebaseapp.com",
-  databaseURL:       "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
-  projectId:         "YOUR_PROJECT_ID",
-  storageBucket:     "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId:             "YOUR_APP_ID"
+  apiKey: "AIzaSyCKlzpAdvNUul5q8zUj3TUj8OwhG_sA9KI",
+  authDomain: "ruby-birthday.firebaseapp.com",
+  databaseURL: "https://ruby-birthday-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "ruby-birthday",
+  storageBucket: "ruby-birthday.firebasestorage.app",
+  messagingSenderId: "703828486361",
+  appId: "1:703828486361:web:93100040166ed8a315f6c8"
 };
 // ─────────────────────────────────────────────────────────────
 
