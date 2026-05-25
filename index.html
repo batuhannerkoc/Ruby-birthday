@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buon Compleanno Roberta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,400&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- COVER -->
+  <header class="cover">
+    <p class="cover-eyebrow">Buon Compleanno &nbsp;✦&nbsp; 2026</p>
+    <h1 class="cover-title">Roberta</h1>
+    <div class="cover-rule" aria-hidden="true"><span></span><span>◆</span><span></span></div>
+    <p class="cover-deck"><em>scatta una foto e lascia un ricordo</em></p>
+    <a href="#booth" class="cover-cta">📷 &nbsp;Apri la fotocamera</a>
+  </header>
+
+
+  <!-- PHOTO BOOTH -->
+  <section class="booth" id="booth">
+
+    <h2 class="section-title">Lascia un <em>ricordo</em></h2>
+
+    <!-- Viewfinder -->
+    <div class="viewfinder" id="viewfinder">
+      <video id="video" autoplay playsinline muted></video>
+      <div class="vf-idle" id="vf-idle"><p>premi il pulsante per aprire la fotocamera</p></div>
+      <div class="flash-overlay" id="flash"></div>
+    </div>
+
+    <!-- Polaroid preview -->
+    <div class="polaroid-wrap" id="polaroid-wrap">
+      <div class="polaroid">
+        <img id="preview" src="" alt="La tua foto" />
+        <p class="polaroid-caption">Compleanno di Roberta &nbsp;✦&nbsp; 2026</p>
+      </div>
+    </div>
+
+    <!-- Controls: step 1 -->
+    <div class="controls" id="ctrl-open">
+      <button class="btn-primary" id="btn-open">📷 &nbsp;Apri la fotocamera</button>
+    </div>
+
+    <!-- Controls: step 2 -->
+    <div class="controls hide" id="ctrl-snap">
+      <button class="btn-primary" id="btn-snap">📸 &nbsp;Scatta foto</button>
+      <button class="btn-ghost" id="btn-flip">🔄 &nbsp;Gira</button>
+    </div>
+
+    <!-- Controls: step 3 -->
+    <div class="controls hide" id="ctrl-preview">
+      <button class="btn-primary" id="btn-save">✅ &nbsp;Salva in galleria</button>
+      <button class="btn-ghost" id="btn-retake">🔄 &nbsp;Rifai</button>
+    </div>
+
+    <p class="booth-status" id="booth-status">Apri la fotocamera e lascia un ricordo a Roberta 💋</p>
+
+  </section>
+
+
+  <!-- GALLERY -->
+  <section class="gallery" id="gallery">
+    <h2 class="section-title">I momenti <em>della festa</em></h2>
+    <p class="gallery-count" id="gallery-count"></p>
+    <div class="gallery-grid" id="gallery-grid">
+      <p class="gallery-empty">Nessuna foto ancora — sii il primo ✦</p>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p class="footer-title">Roberta</p>
+    <p class="footer-sub">Buon Compleanno &nbsp;✦&nbsp; 2026</p>
+  </footer>
+
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <button class="lb-close" id="lb-close" aria-label="Chiudi">✕</button>
+    <div class="lb-polaroid">
+      <img id="lb-img" src="" alt="Foto della festa" />
+      <p class="lb-caption">Compleanno di Roberta &nbsp;✦&nbsp; 2026</p>
+    </div>
+  </div>
+
+  <canvas id="canvas" style="display:none"></canvas>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

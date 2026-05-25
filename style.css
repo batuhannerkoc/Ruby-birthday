@@ -1,0 +1,392 @@
+/* ─────────────────────────────────────────
+   ROBERTA BIRTHDAY — Mobile First
+   Ivory · Charcoal · Dusty Rose · Gold
+   ───────────────────────────────────────── */
+
+:root {
+  --ivory:      #FAF7F2;
+  --ivory-dark: #EDE8DF;
+  --charcoal:   #1C1C1C;
+  --charcoal-s: #3D3535;
+  --rose:       #C4808A;
+  --rose-pale:  #F5E8EA;
+  --gold:       #B89A6A;
+  --muted:      #8A7F78;
+  --ff-display: 'Playfair Display', Georgia, serif;
+  --ff-body:    'Cormorant Garamond', Georgia, serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--ivory);
+  color: var(--charcoal);
+  font-family: var(--ff-body);
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 480px;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
+/* ── COVER ─────────────────────────────── */
+.cover {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  background: var(--charcoal);
+  color: var(--ivory);
+  text-align: center;
+  gap: 1.2rem;
+}
+
+.cover-eyebrow {
+  font-size: .65rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.cover-title {
+  font-family: var(--ff-display);
+  font-size: clamp(5rem, 28vw, 8rem);
+  font-weight: 900;
+  line-height: .9;
+  letter-spacing: -.02em;
+  animation: fadeUp .7s ease both;
+}
+
+.cover-rule {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  width: 60%;
+}
+.cover-rule span:first-child,
+.cover-rule span:last-child {
+  flex: 1;
+  height: 1px;
+  background: rgba(250,247,242,.2);
+  display: block;
+}
+.cover-rule span:nth-child(2) {
+  font-size: .45rem;
+  color: var(--gold);
+}
+
+.cover-deck {
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-size: clamp(.95rem, 4vw, 1.2rem);
+  color: rgba(250,247,242,.6);
+  max-width: 280px;
+}
+
+.cover-cta {
+  display: inline-block;
+  margin-top: .5rem;
+  padding: 1rem 2rem;
+  background: var(--ivory);
+  color: var(--charcoal);
+  font-family: var(--ff-body);
+  font-size: 1rem;
+  text-decoration: none;
+  letter-spacing: .05em;
+  transition: background .2s;
+  animation: bounce 2.5s ease-in-out infinite;
+}
+.cover-cta:hover { background: var(--rose-pale); }
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(5px); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SECTION COMMON ─────────────────────── */
+.section-title {
+  font-family: var(--ff-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+.section-title em { font-style: italic; color: var(--rose); }
+
+/* ── PHOTO BOOTH ────────────────────────── */
+.booth {
+  padding: 3rem 1.25rem 3rem;
+  border-bottom: 1px solid var(--ivory-dark);
+}
+
+/* Viewfinder */
+.viewfinder {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: #111;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  border: 1px solid var(--ivory-dark);
+}
+
+#video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.vf-idle {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+}
+.vf-idle p {
+  font-family: var(--ff-body);
+  font-style: italic;
+  font-size: .9rem;
+  color: rgba(255,255,255,.3);
+  line-height: 1.6;
+}
+
+.flash-overlay {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 5;
+  transition: opacity .05s;
+}
+.flash-overlay.go { opacity: 1; }
+
+/* Polaroid preview */
+.polaroid-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.polaroid {
+  background: #fff;
+  padding: 10px 10px 44px;
+  border: 1px solid var(--ivory-dark);
+  box-shadow: 0 4px 20px rgba(28,28,28,.1);
+  width: 100%;
+  max-width: 320px;
+  animation: polaroidDrop .3s ease both;
+}
+
+@keyframes polaroidDrop {
+  from { opacity: 0; transform: translateY(8px) rotate(-1deg); }
+  to   { opacity: 1; transform: translateY(0) rotate(0deg); }
+}
+
+.polaroid img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+}
+
+.polaroid-caption {
+  text-align: center;
+  font-family: var(--ff-body);
+  font-style: italic;
+  font-size: .8rem;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.hide { display: none !important; }
+
+.btn-primary {
+  width: 100%;
+  padding: 1rem;
+  background: var(--charcoal);
+  color: var(--ivory);
+  border: none;
+  font-family: var(--ff-body);
+  font-size: 1.1rem;
+  letter-spacing: .05em;
+  cursor: pointer;
+  transition: background .2s, transform .1s;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-primary:active { transform: scale(.98); background: var(--charcoal-s); }
+
+.btn-ghost {
+  width: 100%;
+  padding: .85rem;
+  background: transparent;
+  color: var(--charcoal);
+  border: 1px solid var(--charcoal);
+  font-family: var(--ff-body);
+  font-size: 1rem;
+  letter-spacing: .05em;
+  cursor: pointer;
+  transition: background .2s, color .2s, transform .1s;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-ghost:active { background: var(--charcoal); color: var(--ivory); transform: scale(.98); }
+
+.booth-status {
+  text-align: center;
+  font-family: var(--ff-body);
+  font-style: italic;
+  font-size: .95rem;
+  color: var(--muted);
+  min-height: 24px;
+  padding: 0 .5rem;
+  line-height: 1.5;
+}
+
+/* ── GALLERY ────────────────────────────── */
+.gallery {
+  padding: 3rem 1.25rem 5rem;
+}
+
+.gallery-count {
+  text-align: center;
+  font-size: .65rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: -.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.gallery-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem 1rem;
+  font-family: var(--ff-body);
+  font-style: italic;
+  color: var(--muted);
+}
+
+/* Gallery polaroid cards */
+.g-card {
+  background: #fff;
+  padding: 6px 6px 34px;
+  border: 1px solid var(--ivory-dark);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(28,28,28,.07);
+  animation: fadeUp .35s ease both;
+  -webkit-tap-highlight-color: transparent;
+}
+.g-card:active { transform: scale(.97); }
+
+.g-card img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+}
+
+.g-card-cap {
+  text-align: center;
+  font-family: var(--ff-body);
+  font-style: italic;
+  font-size: .68rem;
+  color: var(--muted);
+  margin-top: 5px;
+}
+
+/* ── FOOTER ─────────────────────────────── */
+.site-footer {
+  background: var(--charcoal);
+  color: var(--ivory);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.footer-title {
+  font-family: var(--ff-display);
+  font-size: 2.8rem;
+  font-weight: 900;
+  margin-bottom: .3rem;
+}
+
+.footer-sub {
+  font-family: var(--ff-body);
+  font-style: italic;
+  font-size: .9rem;
+  color: rgba(250,247,242,.4);
+}
+
+/* ── LIGHTBOX ───────────────────────────── */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10,8,8,.93);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+.lightbox.on { display: flex; }
+
+.lb-close {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.25);
+  color: rgba(255,255,255,.7);
+  width: 44px; height: 44px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.lb-polaroid {
+  background: #fff;
+  padding: 10px 10px 46px;
+  width: 100%;
+  max-width: 340px;
+  animation: popIn .2s ease both;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(.93); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.lb-polaroid img { width: 100%; display: block; }
+
+.lb-caption {
+  text-align: center;
+  font-family: var(--ff-body);
+  font-style: italic;
+  font-size: .8rem;
+  color: var(--muted);
+  margin-top: 10px;
+}
