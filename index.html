@@ -1,35 +1,39 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="tr">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Buon Compleanno Roberta</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Roberta | Y2K Doğum G��nü ✦ 2000'ler Stili</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,400&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,400&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
-  <!-- COVER -->
+  <!-- COVER - Y2K GLAM -->
   <header class="cover">
-    <p class="cover-eyebrow">Buon Compleanno &nbsp;✦&nbsp; 2026</p>
+    <p class="cover-eyebrow">✨ BUON COMPLEANNO ✨ &nbsp;✦&nbsp; 2026</p>
     <h1 class="cover-title">Roberta</h1>
     <div class="cover-rule" aria-hidden="true"><span></span><span>◆</span><span></span></div>
     <p class="cover-deck"><em>scatta una foto e lascia un ricordo</em></p>
-    <a href="#booth" class="cover-cta">📷 &nbsp;Apri la fotocamera</a>
+    <a href="#booth" class="cover-cta">📷 &nbsp;APRI LA FOTOCAMERA &nbsp;✨</a>
   </header>
-
 
   <!-- PHOTO BOOTH -->
   <section class="booth" id="booth">
-
-    <h2 class="section-title">Lascia un <em>ricordo</em></h2>
+    <h2 class="section-title">Lascia un <em>ricordo</em> 💕</h2>
 
     <!-- Viewfinder -->
     <div class="viewfinder hide" id="viewfinder">
       <video id="video" autoplay playsinline muted></video>
-      <div class="vf-idle" id="vf-idle"><p>premi il pulsante per aprire la fotocamera</p></div>
+      <div class="vf-idle" id="vf-idle">
+        <p>��� premi il pulsante per aprire la fotocamera</p>
+      </div>
       <div class="flash-overlay" id="flash"></div>
     </div>
 
@@ -49,7 +53,7 @@
     <!-- Controls: step 2 -->
     <div class="controls hide" id="ctrl-snap">
       <button class="btn-primary" id="btn-snap">📸 &nbsp;Scatta foto</button>
-      <button class="btn-ghost" id="btn-flip">🔄 &nbsp;Gira</button>
+      <button class="btn-ghost" id="btn-flip">🔄 &nbsp;Gira la camera</button>
     </div>
 
     <!-- Controls: step 3 -->
@@ -58,27 +62,24 @@
       <button class="btn-ghost" id="btn-retake">🔄 &nbsp;Rifai</button>
     </div>
 
-    <p class="booth-status" id="booth-status">Apri la fotocamera e lascia un ricordo a Roberta 💋</p>
-
+    <p class="booth-status" id="booth-status">💖 Apri la fotocamera e lascia un ricordo a Roberta 💖</p>
   </section>
-
 
   <!-- GALLERY -->
   <section class="gallery" id="gallery">
-    <h2 class="section-title">I momenti <em>della festa</em></h2>
+    <h2 class="section-title">I momenti <em>della festa</em> 🎀</h2>
     <p class="gallery-count" id="gallery-count"></p>
     <div class="gallery-grid" id="gallery-grid">
       <p class="gallery-empty">Nessuna foto ancora — sii il primo ✦</p>
     </div>
   </section>
 
-
   <!-- FOOTER -->
   <footer class="site-footer">
     <p class="footer-title">Roberta</p>
-    <p class="footer-sub">Buon Compleanno &nbsp;✦&nbsp; 2026</p>
+    <p class="footer-sub">Buon Compleanno &nbsp;��&nbsp; 2026</p>
+    <p style="font-size: 12px; margin-top: 20px; opacity: 0.5;">✨ Y2K Forever ✨</p>
   </footer>
-
 
   <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
@@ -92,4 +93,5 @@
   <canvas id="canvas" style="display:none"></canvas>
   <script type="module" src="app.js"></script>
 </body>
+
 </html>

@@ -1,17 +1,18 @@
 /* ─────────────────────────────────────────
-   ROBERTA BIRTHDAY — Mobile First
-   Ivory · Charcoal · Dusty Rose · Gold
+   ROBERTA BIRTHDAY — Y2K EDITION ✦
+   Silver · Fuchsia · Glitter Vibes
    ───────────────────────────────────────── */
 
 :root {
-  --ivory:      #FAF7F2;
-  --ivory-dark: #EDE8DF;
-  --charcoal:   #1C1C1C;
-  --charcoal-s: #3D3535;
-  --rose:       #C4808A;
-  --rose-pale:  #F5E8EA;
-  --gold:       #B89A6A;
-  --muted:      #8A7F78;
+  --silver:     #E0E0E0;
+  --silver-dark: #C0C0C0;
+  --fuchsia:    #FF69B4;
+  --fuchsia-dark: #E0559A;
+  --glitter:    #FFF5F5;
+  --dark-bg:    #1A1A2E;
+  --rose-pale:  #FFE4EC;
+  --gold:       #FFD700;
+  --muted:      #6B5B6B;
   --ff-display: 'Playfair Display', Georgia, serif;
   --ff-body:    'Cormorant Garamond', Georgia, serif;
 }
@@ -20,8 +21,8 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--ivory);
-  color: var(--charcoal);
+  background: linear-gradient(135deg, var(--silver) 0%, var(--glitter) 100%);
+  color: var(--dark-bg);
   font-family: var(--ff-body);
   font-size: 18px;
   line-height: 1.6;
@@ -38,10 +39,25 @@ body {
   align-items: center;
   justify-content: center;
   padding: 3rem 2rem;
-  background: var(--charcoal);
-  color: var(--ivory);
+  background: linear-gradient(135deg, #1A1A2E 0%, #2D1B2E 100%);
+  color: var(--glitter);
   text-align: center;
   gap: 1.2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover::before {
+  content: "✨";
+  font-size: 120px;
+  position: absolute;
+  opacity: 0.1;
+  animation: floatStar 8s infinite;
+}
+
+@keyframes floatStar {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
 }
 
 .cover-eyebrow {
@@ -58,6 +74,10 @@ body {
   line-height: .9;
   letter-spacing: -.02em;
   animation: fadeUp .7s ease both;
+  background: linear-gradient(135deg, var(--gold), var(--fuchsia));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .cover-rule {
@@ -70,7 +90,7 @@ body {
 .cover-rule span:last-child {
   flex: 1;
   height: 1px;
-  background: rgba(250,247,242,.2);
+  background: rgba(255,255,255,.2);
   display: block;
 }
 .cover-rule span:nth-child(2) {
@@ -82,7 +102,7 @@ body {
   font-family: var(--ff-display);
   font-style: italic;
   font-size: clamp(.95rem, 4vw, 1.2rem);
-  color: rgba(250,247,242,.6);
+  color: rgba(255,255,255,.7);
   max-width: 280px;
 }
 
@@ -90,16 +110,18 @@ body {
   display: inline-block;
   margin-top: .5rem;
   padding: 1rem 2rem;
-  background: var(--ivory);
-  color: var(--charcoal);
+  background: linear-gradient(135deg, var(--fuchsia), var(--gold));
+  color: var(--dark-bg);
   font-family: var(--ff-body);
   font-size: 1rem;
   text-decoration: none;
   letter-spacing: .05em;
-  transition: background .2s;
+  transition: all .2s;
   animation: bounce 2.5s ease-in-out infinite;
+  border-radius: 50px;
+  font-weight: bold;
 }
-.cover-cta:hover { background: var(--rose-pale); }
+.cover-cta:hover { transform: scale(1.05); background: var(--fuchsia); }
 
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
@@ -119,12 +141,14 @@ body {
   line-height: 1.1;
   margin-bottom: 1.5rem;
 }
-.section-title em { font-style: italic; color: var(--rose); }
+.section-title em { font-style: italic; color: var(--fuchsia); }
 
 /* ── PHOTO BOOTH ────────────────────────── */
 .booth {
   padding: 3rem 1.25rem 3rem;
-  border-bottom: 1px solid var(--ivory-dark);
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--fuchsia);
 }
 
 /* Viewfinder */
@@ -135,7 +159,9 @@ body {
   background: #111;
   overflow: hidden;
   margin-bottom: 1.25rem;
-  border: 1px solid var(--ivory-dark);
+  border: 3px solid var(--fuchsia);
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255,105,180,0.3);
 }
 
 #video {
@@ -165,13 +191,18 @@ body {
 .flash-overlay {
   position: absolute;
   inset: 0;
-  background: #fff;
+  background: radial-gradient(circle, #fff, #ffb6c1);
   opacity: 0;
   pointer-events: none;
   z-index: 5;
-  transition: opacity .05s;
+  transition: opacity .08s;
 }
-.flash-overlay.go { opacity: 1; }
+.flash-overlay.go { opacity: 0.9; animation: flashPulse 0.2s ease-out; }
+
+@keyframes flashPulse {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
 
 /* Polaroid preview */
 .polaroid-wrap {
@@ -182,17 +213,37 @@ body {
 
 .polaroid {
   background: #fff;
-  padding: 10px 10px 44px;
-  border: 1px solid var(--ivory-dark);
-  box-shadow: 0 4px 20px rgba(28,28,28,.1);
+  padding: 12px 12px 50px;
+  border: 1px solid var(--silver-dark);
+  box-shadow: 0 8px 30px rgba(0,0,0,.15);
   width: 100%;
   max-width: 320px;
-  animation: polaroidDrop .3s ease both;
+  animation: polaroidDrop .4s ease both;
+  transform: rotate(-1deg);
+  position: relative;
+}
+
+.polaroid::before {
+  content: "❤️";
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  font-size: 16px;
+  opacity: 0.6;
+}
+
+.polaroid::after {
+  content: "✦";
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  font-size: 16px;
+  opacity: 0.6;
 }
 
 @keyframes polaroidDrop {
-  from { opacity: 0; transform: translateY(8px) rotate(-1deg); }
-  to   { opacity: 1; transform: translateY(0) rotate(0deg); }
+  from { opacity: 0; transform: translateY(20px) rotate(-3deg); }
+  to   { opacity: 1; transform: translateY(0) rotate(-1deg); }
 }
 
 .polaroid img {
@@ -200,15 +251,17 @@ body {
   aspect-ratio: 1;
   object-fit: cover;
   display: block;
+  border: 2px solid var(--rose-pale);
 }
 
 .polaroid-caption {
   text-align: center;
-  font-family: var(--ff-body);
+  font-family: 'Comic Sans MS', cursive, var(--ff-body);
   font-style: italic;
   font-size: .8rem;
-  color: var(--muted);
-  margin-top: 8px;
+  color: var(--fuchsia);
+  margin-top: 12px;
+  letter-spacing: 1px;
 }
 
 /* Controls */
@@ -224,42 +277,57 @@ body {
 .btn-primary {
   width: 100%;
   padding: 1rem;
-  background: var(--charcoal);
-  color: var(--ivory);
+  background: linear-gradient(135deg, var(--fuchsia), var(--gold));
+  color: var(--dark-bg);
   border: none;
   font-family: var(--ff-body);
   font-size: 1.1rem;
   letter-spacing: .05em;
   cursor: pointer;
-  transition: background .2s, transform .1s;
+  transition: all .2s;
   -webkit-tap-highlight-color: transparent;
+  border-radius: 50px;
+  font-weight: bold;
 }
-.btn-primary:active { transform: scale(.98); background: var(--charcoal-s); }
+.btn-primary:active { transform: scale(.96); }
 
 .btn-ghost {
   width: 100%;
   padding: .85rem;
-  background: transparent;
-  color: var(--charcoal);
-  border: 1px solid var(--charcoal);
+  background: rgba(255,255,255,0.9);
+  color: var(--fuchsia);
+  border: 2px solid var(--fuchsia);
   font-family: var(--ff-body);
   font-size: 1rem;
   letter-spacing: .05em;
   cursor: pointer;
-  transition: background .2s, color .2s, transform .1s;
+  transition: all .2s;
   -webkit-tap-highlight-color: transparent;
+  border-radius: 50px;
 }
-.btn-ghost:active { background: var(--charcoal); color: var(--ivory); transform: scale(.98); }
+.btn-ghost:active { background: var(--fuchsia); color: white; transform: scale(.96); }
 
 .booth-status {
   text-align: center;
   font-family: var(--ff-body);
   font-style: italic;
   font-size: .95rem;
-  color: var(--muted);
+  color: var(--fuchsia);
   min-height: 24px;
   padding: 0 .5rem;
   line-height: 1.5;
+  font-weight: bold;
+}
+
+/* Confetti canvas */
+#confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
 }
 
 /* ── GALLERY ────────────────────────────── */
@@ -272,9 +340,10 @@ body {
   font-size: .65rem;
   letter-spacing: .25em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--fuchsia);
   margin-top: -.8rem;
   margin-bottom: 1.5rem;
+  font-weight: bold;
 }
 
 .gallery-grid {
@@ -295,12 +364,13 @@ body {
 /* Gallery polaroid cards */
 .g-card {
   background: #fff;
-  padding: 6px 6px 34px;
-  border: 1px solid var(--ivory-dark);
+  padding: 8px 8px 38px;
+  border: 1px solid var(--silver-dark);
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(28,28,28,.07);
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
   animation: fadeUp .35s ease both;
   -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s;
 }
 .g-card:active { transform: scale(.97); }
 
@@ -309,21 +379,22 @@ body {
   aspect-ratio: 1;
   object-fit: cover;
   display: block;
+  border: 1px solid var(--rose-pale);
 }
 
 .g-card-cap {
   text-align: center;
-  font-family: var(--ff-body);
+  font-family: 'Comic Sans MS', cursive, var(--ff-body);
   font-style: italic;
   font-size: .68rem;
-  color: var(--muted);
-  margin-top: 5px;
+  color: var(--fuchsia);
+  margin-top: 6px;
 }
 
 /* ── FOOTER ─────────────────────────────── */
 .site-footer {
-  background: var(--charcoal);
-  color: var(--ivory);
+  background: linear-gradient(135deg, #1A1A2E 0%, #2D1B2E 100%);
+  color: var(--glitter);
   padding: 3rem 2rem;
   text-align: center;
 }
@@ -333,13 +404,17 @@ body {
   font-size: 2.8rem;
   font-weight: 900;
   margin-bottom: .3rem;
+  background: linear-gradient(135deg, var(--gold), var(--fuchsia));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .footer-sub {
   font-family: var(--ff-body);
   font-style: italic;
   font-size: .9rem;
-  color: rgba(250,247,242,.4);
+  color: rgba(255,255,255,.5);
 }
 
 /* ── LIGHTBOX ───────────────────────────── */
@@ -347,7 +422,7 @@ body {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(10,8,8,.93);
+  background: rgba(0,0,0,.95);
   z-index: 999;
   align-items: center;
   justify-content: center;
@@ -358,18 +433,19 @@ body {
 .lb-close {
   position: absolute;
   top: 1rem; right: 1rem;
-  background: transparent;
-  border: 1px solid rgba(255,255,255,.25);
-  color: rgba(255,255,255,.7);
+  background: var(--fuchsia);
+  border: none;
+  color: white;
   width: 44px; height: 44px;
-  font-size: 1rem;
+  font-size: 1.5rem;
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
 }
 
 .lb-polaroid {
   background: #fff;
-  padding: 10px 10px 46px;
+  padding: 12px 12px 50px;
   width: 100%;
   max-width: 340px;
   animation: popIn .2s ease both;
@@ -384,9 +460,9 @@ body {
 
 .lb-caption {
   text-align: center;
-  font-family: var(--ff-body);
+  font-family: 'Comic Sans MS', cursive, var(--ff-body);
   font-style: italic;
   font-size: .8rem;
-  color: var(--muted);
+  color: var(--fuchsia);
   margin-top: 10px;
 }
